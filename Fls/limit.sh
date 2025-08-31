@@ -1,5 +1,5 @@
 #!/bin/bash
-REPOSLIM="https://raw.githubusercontent.com/arivpnstores/vip/main/"
+REPOSLIM="https://raw.githubusercontent.com/arivpnstores/v10/main/"
 wget -q -O /usr/bin/limit-ip "${REPOSLIM}install/limit-ip"
 chmod +x /usr/bin/*
 cd /usr/bin
