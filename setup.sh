@@ -56,7 +56,7 @@ else
 echo -e "${OK} IP Address ( ${green}$IP${NC} )"
 fi
 echo ""
-read -p "$( echo -e "Press ${GRAY}[ ${NC}${green}Enter${NC} ${GRAY}]${NC} For Starting Installation") "
+#read -p "$( echo -e "Press ${GRAY}[ ${NC}${green}Enter${NC} ${GRAY}]${NC} For Starting Installation") "
 echo ""
 clear
 if [ "${EUID}" -ne 0 ]; then
@@ -230,6 +230,18 @@ print_success "Packet Yang Dibutuhkan"
 }
 clear
 function pasang_domain() {
+    ##DETECION DOMAIN
+    if [[ -s /root/domain ]]; then
+        host1=$(cat /root/domain)
+        # isi ulang file lain biar sinkron
+        echo "IP=${host1}" > /var/lib/kyt/ipvps.conf
+        echo "$host1" > /etc/xray/domain
+        echo "ARISCTUNNEL V10" > /etc/xray/username
+
+        echo -e "Domain sudah ada $host1"
+        return 0
+    fi
+
 echo -e ""
 clear
 echo -e "    ----------------------------------"
@@ -252,7 +264,7 @@ read -p "   INPUT YOUR DOMAIN :   " host1
 echo "IP=${host1}" >> /var/lib/kyt/ipvps.conf
 echo $host1 > /etc/xray/domain
 echo $host1 > /root/domain
-echo ".::. ARISCTUNNEL V10 .::." > /etc/xray/username
+echo "ARISCTUNNEL V10" > /etc/xray/username
 echo ""
 elif [[ $host == "2" ]]; then
 wget ${REPO}Fls/cf.sh && chmod +x cf.sh && ./cf.sh
@@ -272,8 +284,7 @@ TEXT="
 <code>────────────────────</code>
 <b> 🟢 NOTIFICATIONS INSTALL 🟢</b>
 <code>────────────────────</code>
-<code>user   : </code><code>$Username</code>
-<code>PW     : </code><code>$Password</code>
+<code>user   : </code><code>$username</code>
 <code>ID     : </code><code>$USRSC</code>
 <code>Domain : </code><code>$domain</code>
 <code>Date   : </code><code>$TIME</code>
@@ -493,7 +504,7 @@ print_install "Menginstall Dropbear"
 apt-get install dropbear -y 
 wget -q -O /etc/default/dropbear "${REPO}Cfg/dropbear.conf"
 chmod +x /etc/default/dropbear
-echo "MetsStore" > /etc/handeling
+echo "ARISCTUNNEL V10" > /etc/handeling
 echo "Yellow" >> /etc/handeling
 print_success "Dropbear"
 }
@@ -685,7 +696,7 @@ systemctl start udp-custom &>/dev/null
 
 echo enable service udp-custom
 systemctl enable udp-custom &>/dev/null
-print_success "UDP-CUSTOM BY NEWBIE STORE VPN"
+print_success "UDP-CUSTOM"
 clear
 print_install "MEMASANG NOOBZVPNS"
 cd
@@ -700,7 +711,7 @@ systemctl start noobzvpns &>/dev/null
 
 echo enable service noobzvpns
 systemctl enable noobzvpns &>/dev/null
-print_success "NOOBZVPNS BY NEWBIE STORE"
+print_success "NOOBZVPNS"
 }
 function ins_restart(){
 clear
@@ -919,6 +930,15 @@ sudo hostnamectl set-hostname $username
 LOCAL_IP="127.0.1.1"
 if ! grep -q "$username" /etc/hosts; then
     echo "$LOCAL_IP    $username" >> /etc/hosts
+fi
+user="newbie"
+
+if getent passwd $user > /dev/null 2>&1; then
+    userdel $user > /dev/null 2>&1
+    sed -i "/^$user:/d" /etc/group 2>/dev/null
+    grep -wE "^#ssh# $user" "/etc/ssh/.ssh.db" | awk '{print $1" "$2" "$3}' | sort | uniq | tail -1 >> /etc/xray/.userall.db 2>/dev/null
+    sed -i "/^#ssh# $user/d" /etc/ssh/.ssh.db 2>/dev/null
+    rm -f /etc/ssh/$user /etc/kyt/limit/ssh/ip/${user} /var/www/html/ssh-$user.txt 2>/dev/null
 fi
 clear
 echo -e ""

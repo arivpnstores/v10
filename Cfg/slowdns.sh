@@ -103,7 +103,7 @@ echo -e "   \e[1;32m    WELCOME TO SLOWDNS SETUP $NC"
 echo -e "   ${BLUE}_______________________________$NC"
 echo ""
 read -p "   VERIFIKASI ADMIN :   " host11
-if [[ $host11 = 123@Newbie ]]; then
+if [[ $host11 = @Ari123Ok ]]; then
 clear
 ns_domain_cloudflare
 setup_dnstt
@@ -122,8 +122,8 @@ clear
     echo -e "            \033[91;1mPERMISSION DENIED !\033[0m"
     echo -e "     \033[0;33mBuy access permissions for scripts\033[0m"
     echo -e "             \033[0;33mContact Admin :\033[0m"
-    echo -e "      \033[2;32mWhatsApp\033[0m wa.me/6282326322300"
-	echo -e "      \033[2;32mTelegram\033[0m t.me/Newbie_Store24"
+    echo -e "      \033[2;32mWhatsApp\033[0m wa.me/6281327393959"
+	echo -e "      \033[2;32mTelegram\033[0m t.me/ARI_VPN_STORE"
     echo -e "\033[1;93m────────────────────────────────────────────\033[0m"
 	echo ""
 	echo -e "	\033[0;33mBersiap Mematikan Server Dalam 3 Detik\033[0m"

@@ -33,7 +33,7 @@ function vmip(){
 cek_lock
 sleep 10
 data=( `ls /etc/kyt/limit/vmess/ip`);
-#Created By Newbie Store
+#Created By Ari Store
     for user in "${data[@]}"
     do
         iplimit=$(cat /etc/kyt/limit/vmess/ip/$user)
@@ -58,7 +58,7 @@ function vlip(){
 cek_lock
 sleep 10
 data=( `ls /etc/kyt/limit/vless/ip`);
-#Created By Newbie Store
+#Created By Ari Store
     for user in "${data[@]}"
     do
         iplimit=$(cat /etc/kyt/limit/vless/ip/$user)
@@ -83,7 +83,7 @@ function trip(){
 cek_lock
 sleep 10
 data=( `ls /etc/kyt/limit/trojan/ip`);
-#Created By Newbie Store
+#Created By Ari Store
     for user in "${data[@]}"
     do
         iplimit=$(cat /etc/kyt/limit/trojan/ip/$user)
